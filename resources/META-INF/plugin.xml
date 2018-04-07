@@ -1,0 +1,28 @@
+<idea-plugin>
+  <id>com.verilang</id>
+  <name>Verilog support</name>
+  <version>1.0</version>
+  <vendor email="tsepa.stas@gmail.com">MrTsepa</vendor>
+
+  <description><![CDATA[
+
+    ]]></description>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileTypeFactory implementation="com.verilang.VerilogFileTypeFactory"/>
+    <lang.parserDefinition language="Verilog" implementationClass="com.verilang.VerilogParserDefinition"/>
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+</idea-plugin>
