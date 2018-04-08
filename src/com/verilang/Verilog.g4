@@ -31,7 +31,7 @@
 // blech: spec is wrong. see rule parameter_declaration_ for example.
 // COMPILER DIRECTIVES: I converted them to C preproc and preprocessed with gcc -E.
 
-grammar Verilog2001;
+grammar Verilog;
 
 // 1 Source text
 // 1.1 Library source text

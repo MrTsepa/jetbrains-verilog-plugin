@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/Verilog2001.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/Verilog.g4 by ANTLR 4.7
 package com.verilang;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class Verilog2001Lexer extends Lexer {
+public class VerilogLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -163,13 +163,13 @@ public class Verilog2001Lexer extends Lexer {
 	}
 
 
-	public Verilog2001Lexer(CharStream input) {
+	public VerilogLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Verilog2001.g4"; }
+	public String getGrammarFileName() { return "Verilog.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

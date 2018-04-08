@@ -8,30 +8,52 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.verilang.parser.VerilogParser;
 import com.verilang.psi.VerilogFile;
-import com.verilang.psi.VerilogTypes;
+import org.antlr.jetbrains.adaptor.lexer.ANTLRLexerAdaptor;
+import org.antlr.jetbrains.adaptor.lexer.PSIElementTypeFactory;
+import org.antlr.jetbrains.adaptor.parser.ANTLRParserAdaptor;
+import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
+import org.antlr.v4.runtime.Parser;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
 public class VerilogParserDefinition implements ParserDefinition {
 
-    public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-    public static final TokenSet COMMENTS = TokenSet.create(VerilogTypes.COMMENT);
+    static {
+        PSIElementTypeFactory.defineLanguageIElementTypes(
+                VerilogLanguage.INSTANCE,
+                VerilogParser.tokenNames,
+                VerilogParser.ruleNames
+        );
+    }
+
+    public static final TokenSet WHITESPACES =
+            PSIElementTypeFactory.createTokenSet(
+                    VerilogLanguage.INSTANCE,
+                    VerilogLexer.White_space
+            );
+
+    public static final TokenSet COMMENTS =
+            PSIElementTypeFactory.createTokenSet(
+                    VerilogLanguage.INSTANCE,
+                    VerilogLexer.Block_comment,
+                    VerilogLexer.One_line_comment
+            );
+
+    public static final TokenSet STRINGS =
+            PSIElementTypeFactory.createTokenSet(
+                    VerilogLanguage.INSTANCE,
+                    VerilogLexer.String
+            );
 
     public static final IFileElementType FILE = new IFileElementType(VerilogLanguage.INSTANCE);
 
     @NotNull
-    @Override
-    public Lexer createLexer(Project project) {
-        return new VerilogLexerAdapter();
-    }
-
-    @NotNull
     public TokenSet getWhitespaceTokens() {
-        return WHITE_SPACES;
+        return WHITESPACES;
     }
 
     @NotNull
@@ -41,12 +63,7 @@ public class VerilogParserDefinition implements ParserDefinition {
 
     @NotNull
     public TokenSet getStringLiteralElements() {
-        return TokenSet.EMPTY;
-    }
-
-    @NotNull
-    public PsiParser createParser(final Project project) {
-        return new VerilogParser();
+        return STRINGS;
     }
 
     @Override
@@ -63,9 +80,27 @@ public class VerilogParserDefinition implements ParserDefinition {
     }
 
     @NotNull
+    @Override
+    public Lexer createLexer(Project project) {
+        VerilogLexer lexer = new VerilogLexer(null);
+        return new ANTLRLexerAdaptor(VerilogLanguage.INSTANCE, lexer);
+    }
+
+    @NotNull
+    public PsiParser createParser(final Project project) {
+        final VerilogParser parser = new VerilogParser(null);
+        return new ANTLRParserAdaptor(VerilogLanguage.INSTANCE, parser) {
+            @Override
+            protected ParseTree parse(Parser parser, IElementType root) {
+                System.out.println(root.getClass());
+                return ((VerilogParser) parser).source_text();
+            }
+        };
+    }
+
+    @NotNull
     public PsiElement createElement(ASTNode node) {
-        node.getElementType();
-        return VerilogTypes.Factory.createElement(node);
+        return new ANTLRPsiNode(node);
     }
 
 }
