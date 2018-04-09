@@ -34,7 +34,7 @@ public class VerilogFileType extends LanguageFileType {
     @Nullable
     @Override
     public Icon getIcon() {
-        return VerilogIcons.ICON_SMALL_GREEN;
+        return VerilogIcons.ICON;
     }
 
 }

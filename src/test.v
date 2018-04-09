@@ -3,8 +3,8 @@ module MIL_TXD (
 	input[15:0] dat,
 	input txen,
 
-	output wire TXP, //”Положительные” импульс
-	output wire TXN, //”Отрицательные” импульы
+	output wire TXP, // ”Положительные” импульс
+	output wire TXN, // ”Отрицательные” импульы
 	output wire SY1, // Первый импульс синхронизации
 	output wire SY2, // Второй импульс синхронизации
 	output reg en_tx = 0, //Разрешение передачи

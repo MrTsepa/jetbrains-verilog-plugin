@@ -7,6 +7,6 @@ import javax.swing.*;
 public class VerilogIcons {
 
     public static final Icon ICON_LARGE_BLACK = IconLoader.getIcon("/com/verilang/icons/icon.png");
-    public static final Icon ICON_SMALL_GREEN = IconLoader.getIcon("/com/verilang/icons/icon_green.png");
+    public static final Icon ICON = IconLoader.getIcon("/com/verilang/icons/icon_green.png");
 
 }
