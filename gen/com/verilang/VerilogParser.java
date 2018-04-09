@@ -44,7 +44,8 @@ public class VerilogParser extends Parser {
 		T__161=162, T__162=163, T__163=164, T__164=165, T__165=166, Real_number=167, 
 		Decimal_number=168, Binary_number=169, Octal_number=170, Hex_number=171, 
 		String=172, One_line_comment=173, Block_comment=174, Escaped_identifier=175, 
-		Simple_identifier=176, Dollar_Identifier=177, Time_Identifier=178, White_space=179;
+		Simple_identifier=176, Dollar_Identifier=177, Time_Identifier=178, White_space=179, 
+		Bad_character=180;
 	public static final int
 		RULE_config_declaration = 0, RULE_design_statement = 1, RULE_config_rule_statement = 2, 
 		RULE_default_clause = 3, RULE_inst_clause = 4, RULE_inst_name = 5, RULE_liblist_clause = 6, 
@@ -296,7 +297,7 @@ public class VerilogParser extends Parser {
 		null, null, null, null, null, null, null, null, null, null, null, "Real_number", 
 		"Decimal_number", "Binary_number", "Octal_number", "Hex_number", "String", 
 		"One_line_comment", "Block_comment", "Escaped_identifier", "Simple_identifier", 
-		"Dollar_Identifier", "Time_Identifier", "White_space"
+		"Dollar_Identifier", "Time_Identifier", "White_space", "Bad_character"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -24008,7 +24009,7 @@ public class VerilogParser extends Parser {
 
 	private static final int _serializedATNSegments = 2;
 	private static final String _serializedATNSegment0 =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u00b5\u0f8a\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u00b6\u0f8a\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+

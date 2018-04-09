@@ -19,6 +19,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileTypeFactory implementation="com.verilang.VerilogFileTypeFactory"/>
     <lang.parserDefinition language="Verilog" implementationClass="com.verilang.VerilogParserDefinition"/>
+    <lang.ast.factory language="Verilog" implementationClass="com.verilang.VerilogASTFactory"/>
     <lang.syntaxHighlighterFactory
             language="Verilog"
             implementationClass="com.verilang.highlight.VerilogSyntaxHighlighterFactory"

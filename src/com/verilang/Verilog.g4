@@ -2017,3 +2017,7 @@ escaped_hierarchical_branch
 White_space
    : [ \t\n\r] + -> channel (HIDDEN)
    ;
+
+Bad_character
+   : .
+   ;

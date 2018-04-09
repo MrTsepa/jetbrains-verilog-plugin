@@ -177,6 +177,7 @@ Simple_identifier=176
 Dollar_Identifier=177
 Time_Identifier=178
 White_space=179
+Bad_character=180
 'config'=1
 ';'=2
 'endconfig'=3

@@ -92,7 +92,6 @@ public class VerilogParserDefinition implements ParserDefinition {
         return new ANTLRParserAdaptor(VerilogLanguage.INSTANCE, parser) {
             @Override
             protected ParseTree parse(Parser parser, IElementType root) {
-                System.out.println(root.getClass());
                 return ((VerilogParser) parser).source_text();
             }
         };
