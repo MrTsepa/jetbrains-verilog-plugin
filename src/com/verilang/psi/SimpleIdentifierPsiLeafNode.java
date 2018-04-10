@@ -4,9 +4,9 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiLeafNode;
 
-public class SimpleIdentifierPsiNode extends ANTLRPsiLeafNode {
+public class SimpleIdentifierPsiLeafNode extends ANTLRPsiLeafNode {
 
-    public SimpleIdentifierPsiNode(IElementType type, CharSequence text) {
+    public SimpleIdentifierPsiLeafNode(IElementType type, CharSequence text) {
         super(type, text);
     }
 

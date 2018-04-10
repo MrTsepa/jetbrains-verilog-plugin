@@ -7,14 +7,15 @@ import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
+import com.verilang.VerilogKeywords;
 import com.verilang.VerilogLanguage;
 import com.verilang.VerilogLexer;
 import org.antlr.jetbrains.adaptor.lexer.ANTLRLexerAdaptor;
 import org.antlr.jetbrains.adaptor.lexer.TokenIElementType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
@@ -101,14 +102,8 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
                 ).anyMatch(i -> i == type)) {
             return new TextAttributesKey[]{NUMBER};
         } else if (
-                Stream.of(
-                        "module", "endmodule", "macromodule", "if",
-                        "else", "case", "endcase", "for", "begin", "end",
-                        "always", "output", "wire", "reg", "assign",
-                        "input", "config", "endconfig", "default", "instance",
-                        "posedge", "negedge", "while", "forever", "repeat",
-                        "fork", "join", "initial", "parameter"
-                ).mapToInt(VerilogSyntaxHighlighter::getTypeForLiteralName)
+                Arrays.stream(VerilogKeywords.VERILOG_KEYWORDS)
+                        .mapToInt(VerilogSyntaxHighlighter::getTypeForLiteralName)
                         .anyMatch(i -> i == type)) {
             return new TextAttributesKey[]{KEYWORD};
         } else if (type == VerilogLexer.String) {

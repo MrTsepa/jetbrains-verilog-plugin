@@ -4,7 +4,7 @@ import com.intellij.core.CoreASTFactory;
 import com.intellij.lang.Language;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
-import com.verilang.psi.SimpleIdentifierPsiNode;
+import com.verilang.psi.SimpleIdentifierPsiLeafNode;
 import org.antlr.jetbrains.adaptor.lexer.PSIElementTypeFactory;
 import org.antlr.jetbrains.adaptor.lexer.TokenIElementType;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiLeafNode;
@@ -24,7 +24,7 @@ public class VerilogASTFactory extends CoreASTFactory {
     static {
         tokenIElementTypeClassMap.put(
                 getTokenIElementType(VerilogLexer.Simple_identifier),
-                SimpleIdentifierPsiNode.class
+                SimpleIdentifierPsiLeafNode.class
         );
     }
 

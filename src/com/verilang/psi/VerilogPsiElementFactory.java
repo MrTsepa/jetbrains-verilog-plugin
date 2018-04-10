@@ -24,10 +24,22 @@ public class VerilogPsiElementFactory {
                 getRuleIElementType(VerilogParser.RULE_identifier),
                 IdentifierPsiNode.class
         );
-//        ruleIElementTypeClassMap.put(
-//                getRuleIElementType(VerilogParser.RULE_hierarchical_identifier),
-//                HierarchicalIdentifierPsiNode.class
-//        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_module_or_generate_item_declaration),
+                ModuleOrGenerateItemDeclarationPsiNode.class
+        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_port_declaration),
+                PortDeclaration.class
+        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_parameter_declaration),
+                ParameterDeclaration.class
+        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_hierarchical_identifier),
+                HierarchicalIdentifierPsiNode.class
+        );
     }
 
     private static RuleIElementType getRuleIElementType(int ruleIndex) {

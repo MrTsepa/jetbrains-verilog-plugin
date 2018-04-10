@@ -18,9 +18,9 @@ public class HierarchicalIdentifierPsiNode extends ANTLRPsiNode {
     public PsiReference[] getReferences() {
         return PsiTreeUtil.getChildrenOfTypeAsList(
                 this.getNode().getPsi(),
-                SimpleIdentifierPsiNode.class
+                SimpleIdentifierPsiLeafNode.class
         ).stream()
-                .map(SimpleIdentifierPsiNode::getReference)
+                .map(SimpleIdentifierPsiLeafNode::getReference)
                 .toArray(PsiReference[]::new);
     }
 }

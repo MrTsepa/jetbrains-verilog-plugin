@@ -6,6 +6,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.verilang.VerilogFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,9 +14,9 @@ import java.util.Collection;
 import java.util.Objects;
 
 
-public class SimpleIdentifierReference extends PsiReferenceBase<SimpleIdentifierPsiNode> {
+public class SimpleIdentifierReference extends PsiReferenceBase<SimpleIdentifierPsiLeafNode> {
 
-    public SimpleIdentifierReference(@NotNull SimpleIdentifierPsiNode element) {
+    public SimpleIdentifierReference(@NotNull SimpleIdentifierPsiLeafNode element) {
         super(element, new TextRange(0, element.getText().length()));
     }
 
@@ -38,7 +39,22 @@ public class SimpleIdentifierReference extends PsiReferenceBase<SimpleIdentifier
         Collection<IdentifierPsiNode> identifierPsiNodes =
                 PsiTreeUtil.findChildrenOfType(file, IdentifierPsiNode.class);
         return identifierPsiNodes.stream()
-                .map(LookupElementBuilder::create)
-                .toArray();
+                .map(node -> {
+                    TypedDeclaration typedDeclarationParent =
+                            PsiTreeUtil.getParentOfType(
+                                    node,
+                                    TypedDeclaration.class
+                            );
+                    if (typedDeclarationParent != null) {
+                        String typeText = typedDeclarationParent.getTypeText();
+                        return LookupElementBuilder.create(node)
+                                .withIcon(VerilogFileType.INSTANCE.getIcon())
+                                .withTypeText(typeText);
+                    }
+
+                    return LookupElementBuilder.create(node)
+                            .withIcon(VerilogFileType.INSTANCE.getIcon());
+                }).toArray();
     }
+
 }
