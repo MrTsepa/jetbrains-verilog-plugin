@@ -1,7 +1,8 @@
-package com.verilang.psi;
+package com.verilang.psi.factory;
 
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
+import com.verilang.psi.SimpleIdentifierReference;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiLeafNode;
 
 public class SimpleIdentifierPsiLeafNode extends ANTLRPsiLeafNode {

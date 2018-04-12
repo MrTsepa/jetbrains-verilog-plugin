@@ -12,7 +12,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.verilang.psi.VerilogFile;
-import com.verilang.psi.VerilogPsiElementFactory;
+import com.verilang.psi.factory.VerilogPsiNodeFactory;
 import org.antlr.jetbrains.adaptor.lexer.ANTLRLexerAdaptor;
 import org.antlr.jetbrains.adaptor.lexer.PSIElementTypeFactory;
 import org.antlr.jetbrains.adaptor.parser.ANTLRParserAdaptor;
@@ -99,7 +99,7 @@ public class VerilogParserDefinition implements ParserDefinition {
 
     @NotNull
     public PsiElement createElement(ASTNode node) {
-        return VerilogPsiElementFactory.createComposite(node);
+        return VerilogPsiNodeFactory.createComposite(node);
     }
 
 }

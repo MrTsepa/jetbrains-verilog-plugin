@@ -1,6 +1,7 @@
-package com.verilang.psi;
+package com.verilang.psi.factory;
 
 import com.intellij.lang.ASTNode;
+import com.verilang.psi.TypedDeclaration;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
 import org.jetbrains.annotations.NotNull;
 

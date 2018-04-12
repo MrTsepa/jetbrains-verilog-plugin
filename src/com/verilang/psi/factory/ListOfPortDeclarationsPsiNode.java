@@ -1,4 +1,4 @@
-package com.verilang.psi;
+package com.verilang.psi.factory;
 
 import com.intellij.lang.ASTNode;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;

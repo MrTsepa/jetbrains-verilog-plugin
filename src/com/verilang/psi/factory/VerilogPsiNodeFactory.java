@@ -1,4 +1,4 @@
-package com.verilang.psi;
+package com.verilang.psi.factory;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
@@ -12,7 +12,7 @@ import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VerilogPsiElementFactory {
+public class VerilogPsiNodeFactory {
 
     private static Language LANGUAGE = VerilogLanguage.INSTANCE;
 
