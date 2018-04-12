@@ -30,15 +30,19 @@ public class VerilogPsiElementFactory {
         );
         ruleIElementTypeClassMap.put(
                 getRuleIElementType(VerilogParser.RULE_port_declaration),
-                PortDeclaration.class
+                PortDeclarationPsiNode.class
         );
         ruleIElementTypeClassMap.put(
                 getRuleIElementType(VerilogParser.RULE_parameter_declaration),
-                ParameterDeclaration.class
+                ParameterDeclarationPsiNode.class
         );
         ruleIElementTypeClassMap.put(
                 getRuleIElementType(VerilogParser.RULE_hierarchical_identifier),
                 HierarchicalIdentifierPsiNode.class
+        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_list_of_port_declarations),
+                ListOfPortDeclarationsPsiNode.class
         );
     }
 

@@ -10,6 +10,7 @@ import com.intellij.psi.tree.IElementType;
 import com.verilang.VerilogKeywords;
 import com.verilang.VerilogLanguage;
 import com.verilang.VerilogLexer;
+import com.verilang.VerilogParser;
 import org.antlr.jetbrains.adaptor.lexer.ANTLRLexerAdaptor;
 import org.antlr.jetbrains.adaptor.lexer.TokenIElementType;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +37,7 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
             );
     public static final TextAttributesKey COMMA =
             createTextAttributesKey(
-                    "VERILOG_SEMICOLON",
+                    "VERILOG_COMMA",
                     DefaultLanguageHighlighterColors.COMMA
             );
     public static final TextAttributesKey KEYWORD =
@@ -63,6 +64,11 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey(
                     "VERILOG_DOLLAR_IDENTIFIER",
                     CustomHighlighterColors.CUSTOM_KEYWORD2_ATTRIBUTES
+            );
+    public static final TextAttributesKey DELAY_CONTROL =
+            createTextAttributesKey(
+                    "VERILOG_DELAY_CONTROL",
+                    CustomHighlighterColors.CUSTOM_KEYWORD3_ATTRIBUTES
             );
     public static final TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey(
@@ -117,8 +123,8 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
             return new TextAttributesKey[]{IDENTIFIER};
         } else if (type == VerilogLexer.Dollar_Identifier) {
             return new TextAttributesKey[]{DOLLAR_IDENTIFIER};
-        } else if (type == VerilogLexer.Bad_character) {
-            return new TextAttributesKey[]{BAD_CHARACTER};
+        } else if (type == VerilogParser.RULE_delay_control) {
+            return new TextAttributesKey[]{DELAY_CONTROL};
         }
         return new TextAttributesKey[0];
     }

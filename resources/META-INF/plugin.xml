@@ -1,12 +1,19 @@
 <idea-plugin>
   <id>com.verilang</id>
   <name>Verilog support</name>
-  <version>1.0</version>
+  <version>0.1</version>
   <vendor email="tsepa.stas@gmail.com">MrTsepa</vendor>
 
-  <description><![CDATA[
+  <description>
+      <![CDATA[
+        The Verilog plugin provide support of Verilog language
+        in your project. It currently supports Verilog2001
+        syntax highlighting, "Go to definition", code completion.
 
-    ]]></description>
+        This plugin is build using ANTLR grammar and is based on
+        https://github.com/antlr/jetbrains.
+      ]]>
+  </description>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="173.0"/>
@@ -23,6 +30,10 @@
     <lang.syntaxHighlighterFactory
             language="Verilog"
             implementationClass="com.verilang.highlight.VerilogSyntaxHighlighterFactory"
+    />
+    <completion.contributor
+            language="Verilog"
+            implementationClass="com.verilang.completion.VerilogCompletionContributor"
     />
   </extensions>
 

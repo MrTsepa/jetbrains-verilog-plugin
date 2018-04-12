@@ -4,14 +4,15 @@ import com.intellij.lang.ASTNode;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
 import org.jetbrains.annotations.NotNull;
 
-public class ParameterDeclaration extends ANTLRPsiNode implements TypedDeclaration {
+public class PortDeclarationPsiNode extends ANTLRPsiNode implements TypedDeclaration {
 
-    public ParameterDeclaration(@NotNull ASTNode node) {
+    public PortDeclarationPsiNode(@NotNull ASTNode node) {
         super(node);
     }
 
+    @Override
     public String getTypeText() {
-        return getFirstChild().getFirstChild().getText();
+        return this.getLastChild().getFirstChild().getText();
     }
 
 }
