@@ -14,16 +14,21 @@ public class ModuleOrGenerateItemDeclarationPsiNode
         super(node);
     }
 
+    /**
+     * By default we consider that declaration has its type in first child's text.
+     * This may be overridden by implementing TypedDeclaration by child class,
+     * e.g. see {@link RegDeclarationPsiNode}
+     */
     @Override
     public String getTypeText() {
         // We are sure that there is always only one non-leaf child
-        PsiElement child = this.getFirstChild();
+        PsiElement unwrappedDeclaration = this.getFirstChild();
 
-        // all declarations except "net_declaration" has their
-        // type as first child literal.
-        // "net_declaration" first child is either "net_type" or literal "trireg".
-        // anyway all names of this types can be got by getText()
-        return child.getFirstChild().getText();
+        if (unwrappedDeclaration instanceof TypedDeclaration) {
+            return ((TypedDeclaration) unwrappedDeclaration).getTypeText();
+        }
+
+        return unwrappedDeclaration.getFirstChild().getText();
     }
 
 }

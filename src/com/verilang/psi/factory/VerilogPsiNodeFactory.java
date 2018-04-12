@@ -44,6 +44,14 @@ public class VerilogPsiNodeFactory {
                 getRuleIElementType(VerilogParser.RULE_list_of_port_declarations),
                 ListOfPortDeclarationsPsiNode.class
         );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_reg_declaration),
+                RegDeclarationPsiNode.class
+        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_net_declaration),
+                NetDeclarationPsiNode.class
+        );
     }
 
     private static RuleIElementType getRuleIElementType(int ruleIndex) {
