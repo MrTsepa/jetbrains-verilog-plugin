@@ -82,25 +82,30 @@ public class SimpleIdentifierReference extends PsiReferenceBase.Poly<SimpleIdent
     @NotNull
     @Override
     public Object[] getVariants() {
-        PsiFile file = myElement.getContainingFile();
-        Collection<IdentifierPsiNode> identifierPsiNodes =
-                PsiTreeUtil.findChildrenOfType(file, IdentifierPsiNode.class);
-        return identifierPsiNodes.stream()
+       return getAllVerilogFiles().stream()
+                .flatMap(file -> PsiTreeUtil.findChildrenOfType(file, IdentifierPsiNode.class).stream())
                 .map(node -> {
                     TypedDeclaration typedDeclarationParent =
                             PsiTreeUtil.getParentOfType(
                                     node,
                                     TypedDeclaration.class
                             );
+                    ModuleDeclarationPsiNode nodeModule =
+                            PsiTreeUtil.getParentOfType(node, ModuleDeclarationPsiNode.class);
+                    String typeText = "";
+                    String tailText = "";
+                    if (nodeModule != null && nodeModule.getName() != null) {
+                        tailText += " (" + nodeModule.getName() + ")";
+                    }
+
                     if (typedDeclarationParent != null) {
-                        String typeText = typedDeclarationParent.getTypeText();
-                        return LookupElementBuilder.create(node)
-                                .withIcon(VerilogFileType.INSTANCE.getIcon())
-                                .withTypeText(typeText);
+                        typeText += typedDeclarationParent.getTypeText();
                     }
 
                     return LookupElementBuilder.create(node)
-                            .withIcon(VerilogFileType.INSTANCE.getIcon());
+                            .withIcon(VerilogFileType.INSTANCE.getIcon())
+                            .withTypeText(typeText)
+                            .withTailText(tailText);
                 }).toArray();
     }
 
