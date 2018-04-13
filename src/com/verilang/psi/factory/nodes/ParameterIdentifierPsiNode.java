@@ -15,6 +15,13 @@ public class ParameterIdentifierPsiNode extends ANTLRPsiNode
         super(node);
     }
 
+    @Override
+    public String getName() {
+        if (getNameIdentifier() == null)
+            return null;
+        return getNameIdentifier().getText();
+    }
+
     @Nullable
     @Override
     public PsiElement getNameIdentifier() {

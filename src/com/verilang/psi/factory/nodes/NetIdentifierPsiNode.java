@@ -16,6 +16,12 @@ public class NetIdentifierPsiNode extends ANTLRPsiNode implements PsiNameIdentif
         super(node);
     }
 
+    @Override
+    public String getName() {
+        if (getNameIdentifier() == null)
+            return null;
+        return getNameIdentifier().getText();
+    }
 
     @Nullable
     @Override

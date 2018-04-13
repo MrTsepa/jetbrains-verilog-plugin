@@ -3,10 +3,10 @@ package com.verilang.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface ScopeNode extends PsiElement {
 
-    List<PsiNamedElement> getAvaileableNamedElements();
+    Collection<PsiNamedElement> getAvailableNamedElements();
 
 }

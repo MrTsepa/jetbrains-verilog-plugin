@@ -5,7 +5,8 @@ import com.verilang.psi.TypedDeclaration;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
 import org.jetbrains.annotations.NotNull;
 
-public class ParameterDeclarationPsiNode extends ANTLRPsiNode implements TypedDeclaration {
+public class ParameterDeclarationPsiNode extends ANTLRPsiNode
+        implements TypedDeclaration {
 
     public ParameterDeclarationPsiNode(@NotNull ASTNode node) {
         super(node);

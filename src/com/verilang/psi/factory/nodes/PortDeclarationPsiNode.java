@@ -9,7 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class PortDeclarationPsiNode extends ANTLRPsiNode implements TypedDeclaration {
+public class PortDeclarationPsiNode extends ANTLRPsiNode
+        implements TypedDeclaration {
 
     public PortDeclarationPsiNode(@NotNull ASTNode node) {
         super(node);

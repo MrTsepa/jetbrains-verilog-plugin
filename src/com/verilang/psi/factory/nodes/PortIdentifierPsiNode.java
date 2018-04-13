@@ -10,10 +10,18 @@ import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PortIdentifierPsiNode extends ANTLRPsiNode implements PsiNameIdentifierOwner {
+public class PortIdentifierPsiNode extends ANTLRPsiNode
+        implements PsiNameIdentifierOwner {
 
     public PortIdentifierPsiNode(@NotNull ASTNode node) {
         super(node);
+    }
+
+    @Override
+    public String getName() {
+        if (getNameIdentifier() == null)
+            return null;
+        return getNameIdentifier().getText();
     }
 
     @Nullable
