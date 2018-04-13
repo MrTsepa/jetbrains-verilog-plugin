@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.verilang</id>
   <name>Verilog support</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <vendor email="tsepa.stas@gmail.com">MrTsepa</vendor>
 
   <description>
@@ -10,8 +10,12 @@
         in your project. It currently supports Verilog2001
         syntax highlighting, "Go to definition", code completion.
 
+        At the moment this plugin DOES NOT support building
+        or visualizing verilog programs, it will be done in future
+        using some open-source verilog compilator, e.g. iVerilog.
+
         This plugin is build using ANTLR grammar and is based on
-        https://github.com/antlr/jetbrains.
+        antlr-jetbrains adapter https://github.com/antlr/jetbrains.
       ]]>
   </description>
 
