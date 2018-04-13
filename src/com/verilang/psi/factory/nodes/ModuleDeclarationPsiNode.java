@@ -62,7 +62,8 @@ public class ModuleDeclarationPsiNode extends ANTLRPsiNode
                         .filter(portIdentifierPsiNode -> PsiTreeUtil.getParentOfType(
                                 portIdentifierPsiNode,
                                 ModuleInstantiationPsiNode.class
-                        ) == null)
+                        ) == null),
+                PsiTreeUtil.findChildrenOfType(this, VariableIdentifierPsiNode.class).stream()
         ).flatMap(stream -> stream)
                 .collect(Collectors.toList());
     }

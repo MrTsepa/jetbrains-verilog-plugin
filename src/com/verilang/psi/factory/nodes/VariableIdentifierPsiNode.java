@@ -10,9 +10,9 @@ import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ModuleIdentifierPsiNode extends ANTLRPsiNode implements PsiNameIdentifierOwner {
+public class VariableIdentifierPsiNode extends ANTLRPsiNode implements PsiNameIdentifierOwner {
 
-    public ModuleIdentifierPsiNode(@NotNull ASTNode node) {
+    public VariableIdentifierPsiNode(@NotNull ASTNode node) {
         super(node);
     }
 

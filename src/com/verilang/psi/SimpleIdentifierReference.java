@@ -1,6 +1,5 @@
 package com.verilang.psi;
 
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FileTypeIndex;
@@ -82,32 +81,9 @@ public class SimpleIdentifierReference extends PsiReferenceBase.Poly<SimpleIdent
     @NotNull
     @Override
     public Object[] getVariants() {
-       return getAllVerilogFiles().stream()
-                .flatMap(file -> PsiTreeUtil.findChildrenOfType(file, IdentifierPsiNode.class).stream())
-                .map(node -> {
-                    TypedDeclaration typedDeclarationParent =
-                            PsiTreeUtil.getParentOfType(
-                                    node,
-                                    TypedDeclaration.class
-                            );
-                    ModuleDeclarationPsiNode nodeModule =
-                            PsiTreeUtil.getParentOfType(node, ModuleDeclarationPsiNode.class);
-                    String typeText = "";
-                    String tailText = "";
-                    if (nodeModule != null && nodeModule.getName() != null) {
-                        tailText += " (" + nodeModule.getName() + ")";
-                    }
-
-                    if (typedDeclarationParent != null) {
-                        typeText += typedDeclarationParent.getTypeText();
-                    }
-
-                    return LookupElementBuilder.create(node)
-                            .withIcon(VerilogFileType.INSTANCE.getIcon())
-                            .withTypeText(typeText)
-                            .withTailText(tailText);
-                }).toArray();
+        return new Object[0];
     }
+
 
     private boolean isChildOf(Class<? extends ANTLRPsiNode> aClass) {
         return PsiTreeUtil.getParentOfType(myElement, aClass) != null;
