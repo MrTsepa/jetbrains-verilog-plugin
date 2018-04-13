@@ -4,6 +4,7 @@ import com.intellij.lang.Language;
 import com.intellij.psi.tree.IElementType;
 import com.verilang.VerilogLanguage;
 import com.verilang.VerilogLexer;
+import com.verilang.psi.factory.nodes.SimpleIdentifierPsiLeafNode;
 import org.antlr.jetbrains.adaptor.lexer.PSIElementTypeFactory;
 import org.antlr.jetbrains.adaptor.lexer.TokenIElementType;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiLeafNode;
@@ -30,15 +31,19 @@ public class VerilogPsiLeafNodeFactory {
                 .get(tokenIndex);
     }
 
-    public static ANTLRPsiLeafNode createLeaf(@NotNull IElementType type, @NotNull CharSequence text) {
+    public static ANTLRPsiLeafNode create(@NotNull IElementType type, @NotNull CharSequence text) {
         if (tokenIElementTypeClassMap.containsKey(type)) {
             try {
                 return tokenIElementTypeClassMap.get(type)
-                        .getConstructor(IElementType.class, CharSequence.class)
-                        .newInstance(type, text);
+                        .getConstructor(CharSequence.class)
+                        .newInstance(text);
             } catch (ReflectiveOperationException ignored) {}
         }
         return new ANTLRPsiLeafNode(type, text);
+    }
+
+    public static ANTLRPsiLeafNode create(int tokenIndex, @NotNull CharSequence charSequence) {
+        return create(getTokenIElementType(tokenIndex), charSequence);
     }
 
 }

@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/Verilog.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * This interface defines a complete listener for a parse tree produced by
  * {@link VerilogParser}.
  */
-public interface VerilogListener extends ParseTreeListener {
+public interface VerilogParserListener extends ParseTreeListener {
 	/**
 	 * Enter a parse tree produced by {@link VerilogParser#config_declaration}.
 	 * @param ctx the parse tree
@@ -227,16 +227,6 @@ public interface VerilogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModule_or_generate_item(VerilogParser.Module_or_generate_itemContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link VerilogParser#non_port_module_item}.
-	 * @param ctx the parse tree
-	 */
-	void enterNon_port_module_item(VerilogParser.Non_port_module_itemContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link VerilogParser#non_port_module_item}.
-	 * @param ctx the parse tree
-	 */
-	void exitNon_port_module_item(VerilogParser.Non_port_module_itemContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link VerilogParser#module_or_generate_item_declaration}.
 	 * @param ctx the parse tree

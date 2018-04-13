@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/Verilog.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -6,11 +6,11 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link VerilogListener},
+ * This class provides an empty implementation of {@link VerilogParserListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class VerilogBaseListener implements VerilogListener {
+public class VerilogParserBaseListener implements VerilogParserListener {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -275,18 +275,6 @@ public class VerilogBaseListener implements VerilogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitModule_or_generate_item(VerilogParser.Module_or_generate_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNon_port_module_item(VerilogParser.Non_port_module_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNon_port_module_item(VerilogParser.Non_port_module_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

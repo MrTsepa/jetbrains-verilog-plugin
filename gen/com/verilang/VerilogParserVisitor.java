@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/Verilog.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public interface VerilogVisitor<T> extends ParseTreeVisitor<T> {
+public interface VerilogParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
 	 * Visit a parse tree produced by {@link VerilogParser#config_declaration}.
 	 * @param ctx the parse tree
@@ -142,12 +142,6 @@ public interface VerilogVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitModule_or_generate_item(VerilogParser.Module_or_generate_itemContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VerilogParser#non_port_module_item}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNon_port_module_item(VerilogParser.Non_port_module_itemContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link VerilogParser#module_or_generate_item_declaration}.
 	 * @param ctx the parse tree

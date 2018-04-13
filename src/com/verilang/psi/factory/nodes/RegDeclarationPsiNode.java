@@ -1,4 +1,4 @@
-package com.verilang.psi.factory;
+package com.verilang.psi.factory.nodes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;

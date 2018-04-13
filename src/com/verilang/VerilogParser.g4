@@ -31,7 +31,10 @@
 // blech: spec is wrong. see rule parameter_declaration_ for example.
 // COMPILER DIRECTIVES: I converted them to C preproc and preprocessed with gcc -E.
 
-grammar Verilog;
+parser grammar VerilogParser;
+
+options
+   { tokenVocab = VerilogLexer; }
 
 // 1 Source text
 // 1.1 Library source text
@@ -89,7 +92,7 @@ cell_clause
    ;
 
 use_clause
-   : 'use' (library_identifier '.')? cell_identifier (':config')?
+   : 'use' (library_identifier '.')? cell_identifier (':' 'config')?
    ;
 
 // 1.3 Module and primitive source text
@@ -103,8 +106,12 @@ description
    ;
 
 module_declaration
-   : attribute_instance* module_keyword module_identifier (module_parameter_port_list)? (list_of_ports)? ';' module_item* 'endmodule'
-   | attribute_instance* module_keyword module_identifier (module_parameter_port_list)? (list_of_port_declarations)? ';' non_port_module_item* 'endmodule'
+   : attribute_instance*
+     module_keyword module_identifier
+     (module_parameter_port_list)?
+     (list_of_port_declarations | list_of_ports)? ';'
+     module_item*
+     'endmodule'
    ;
 
 module_keyword
@@ -167,15 +174,6 @@ module_or_generate_item
    | attribute_instance* module_instantiation
    | attribute_instance* initial_construct
    | attribute_instance* always_construct
-   ;
-
-non_port_module_item
-   : attribute_instance* generated_instantiation
-   | attribute_instance* local_parameter_declaration
-   | attribute_instance* module_or_generate_item
-   | attribute_instance* parameter_declaration
-   | attribute_instance* specify_block
-   | attribute_instance* specparam_declaration
    ;
 
 module_or_generate_item_declaration
@@ -416,8 +414,8 @@ specparam_assignment
    ;
 
 pulse_control_specparam
-   : 'PATHPULSE$' '=' '(' reject_limit_value (',' error_limit_value)? ')' ';'
-   | 'PATHPULSE$' specify_input_terminal_descriptor '$' specify_output_terminal_descriptor '=' '(' reject_limit_value (',' error_limit_value)? ')' ';'
+   : 'PATHPULSE' '$' '=' '(' reject_limit_value (',' error_limit_value)? ')' ';'
+   | 'PATHPULSE' '$' specify_input_terminal_descriptor '$' specify_output_terminal_descriptor '=' '(' reject_limit_value (',' error_limit_value)? ')' ';'
    ;
 
 error_limit_value
@@ -1073,7 +1071,7 @@ parallel_path_description
    ;
 
 full_path_description
-   : '(' list_of_path_inputs (polarity_operator)? '*>' list_of_path_outputs ')'
+   : '(' list_of_path_inputs (polarity_operator)? '*' '>' list_of_path_outputs ')'
    ;
 
 list_of_path_inputs
@@ -1469,8 +1467,8 @@ constant_mintypmax_expression
 constant_range_expression
    : constant_expression
    | msb_constant_expression ':' lsb_constant_expression
-   | constant_base_expression '+:' width_constant_expression
-   | constant_base_expression '-:' width_constant_expression
+   | constant_base_expression '+' ':' width_constant_expression
+   | constant_base_expression '-' ':' width_constant_expression
    ;
 
 dimension_constant_expression
@@ -1514,8 +1512,8 @@ msb_constant_expression
 range_expression
    : expression
    | msb_constant_expression ':' lsb_constant_expression
-   | base_expression '+:' width_constant_expression
-   | base_expression '-:' width_constant_expression
+   | base_expression '+' ':' width_constant_expression
+   | base_expression '-' ':' width_constant_expression
    ;
 
 width_constant_expression
@@ -1583,12 +1581,12 @@ unary_operator
    | '!'
    | '~'
    | '&'
-   | '~&'
+   | '~' '&'
    | '|'
-   | '~|'
+   | '~' '|'
    | '^'
-   | '~^'
-   | '^~'
+   | '~' '^'
+   | '^' '~'
    ;
 
 binary_operator
@@ -1601,46 +1599,46 @@ binary_operator
    | '!='
    | '==='
    | '!=='
-   | '&&'
-   | '||'
-   | '**'
+   | '&' '&'
+   | '|' '|'
+   | '*' '*'
    | '<'
    | '<='
    | '>'
-   | '>='
+   | '>' '='
    | '&'
    | '|'
    | '^'
-   | '^~'
-   | '~^'
-   | '>>'
-   | '<<'
-   | '>>>'
-   | '<<<'
+   | '^' '~'
+   | '~' '^'
+   | '>' '>'
+   | '<' '<'
+   | '>' '>' '>'
+   | '<' '<' '<'
    ;
 
 unary_module_path_operator
    : '!'
    | '~'
    | '&'
-   | '~&'
+   | '~' '&'
    | '|'
-   | '~|'
+   | '~' '|'
    | '^'
-   | '~^'
-   | '^~'
+   | '~' '^'
+   | '^' '~'
    ;
 
 binary_module_path_operator
    : '=='
    | '!='
-   | '&&'
-   | '||'
+   | '&' '&'
+   | '|' '|'
    | '&'
    | '|'
    | '^'
-   | '^~'
-   | '~^'
+   | '^' '~'
+   | '~' '^'
    ;
 
 // 8.7 Numbers
@@ -1653,130 +1651,10 @@ number
    ;
 
 
-Real_number
-   : Unsigned_number '.' Unsigned_number | Unsigned_number ('.' Unsigned_number)? [eE] ([+-])? Unsigned_number
-   ;
-
-
-Decimal_number
-   : Unsigned_number | (Size)? Decimal_base Unsigned_number | (Size)? Decimal_base X_digit ('_')* | (Size)? Decimal_base Z_digit ('_')*
-   ;
-
-
-Binary_number
-   : (Size)? Binary_base Binary_value
-   ;
-
-
-Octal_number
-   : (Size)? Octal_base Octal_value
-   ;
-
-
-Hex_number
-   : (Size)? Hex_base Hex_value
-   ;
-
-
-fragment Sign
-   : [+-]
-   ;
-
-
-fragment Size
-   : Non_zero_unsigned_number
-   ;
-
-
-fragment Non_zero_unsigned_number
-   : Non_zero_decimal_digit ('_' | Decimal_digit)*
-   ;
-
-
-fragment Unsigned_number
-   : Decimal_digit ('_' | Decimal_digit)*
-   ;
-
-
-fragment Binary_value
-   : Binary_digit ('_' | Binary_digit)*
-   ;
-
-
-fragment Octal_value
-   : Octal_digit ('_' | Octal_digit)*
-   ;
-
-
-fragment Hex_value
-   : Hex_digit ('_' | Hex_digit)*
-   ;
-
-
-fragment Decimal_base
-   : '\'' [sS]? [dD]
-   ;
-
-
-fragment Binary_base
-   : '\'' [sS]? [bB]
-   ;
-
-
-fragment Octal_base
-   : '\'' [sS]? [oO]
-   ;
-
-
-fragment Hex_base
-   : '\'' [sS]? [hH]
-   ;
-
-
-fragment Non_zero_decimal_digit
-   : [1-9]
-   ;
-
-
-fragment Decimal_digit
-   : [0-9]
-   ;
-
-
-fragment Binary_digit
-   : X_digit | Z_digit | [01]
-   ;
-
-
-fragment Octal_digit
-   : X_digit | Z_digit | [0-7]
-   ;
-
-
-fragment Hex_digit
-   : X_digit | Z_digit | [0-9a-fA-F]
-   ;
-
-
-fragment X_digit
-   : [xX]
-   ;
-
-
-fragment Z_digit
-   : [zZ?]
-   ;
-
-// 8.8 Strings
-
-String
-   : '"' (~ [\n\r])* '"'
-   ;
-
 // 9 General
 // 9.1 Attributes
 timing_spec
-   : '`timescale' Time_Identifier '/' Time_Identifier
+   : '`' 'timescale' Time_identifier '/' Time_identifier
    ;
 
 attribute_instance
@@ -1790,17 +1668,6 @@ attr_spec
 
 attr_name
    : identifier
-   ;
-
-// 9.2 Comments
-
-One_line_comment
-   : '//' .*? '\r'? '\n' -> channel (HIDDEN)
-   ;
-
-
-Block_comment
-   : '/*' .*? '*/' -> channel (HIDDEN)
    ;
 
 // 9.3 Identifiers
@@ -1827,11 +1694,6 @@ escaped_arrayed_identifier
 
 escaped_hierarchical_identifier
    : escaped_hierarchical_branch ('.' simple_hierarchical_branch | '.' escaped_hierarchical_branch)*
-   ;
-
-
-Escaped_identifier
-   : '\\' ('\u0021'..'\u007E')+ ~ [ \r\t\n]*
    ;
 
 event_identifier
@@ -1952,27 +1814,12 @@ specparam_identifier
    : identifier
    ;
 
-
-Simple_identifier
-   : [a-zA-Z_] [a-zA-Z0-9_$]*
-   ;
-
-
-Dollar_Identifier
-   : '$' [a-zA-Z0-9_$] [a-zA-Z0-9_$]*
-   ;
-
-
-Time_Identifier
-   : [0-9] + [mnpf] 's'
-   ;
-
 system_function_identifier
-   : Dollar_Identifier
+   : Dollar_identifier
    ;
 
 system_task_identifier
-   : Dollar_Identifier
+   : Dollar_identifier
    ;
 
 task_identifier
@@ -2010,14 +1857,4 @@ simple_hierarchical_branch
 
 escaped_hierarchical_branch
    : Escaped_identifier ('[' Decimal_number ']')? ('.' Escaped_identifier ('[' Decimal_number ']')?)*
-   ;
-
-// 9.5 White space
-
-White_space
-   : [ \t\n\r] + -> channel (HIDDEN)
-   ;
-
-Bad_character
-   : .
    ;

@@ -5,6 +5,7 @@ import com.intellij.lang.Language;
 import com.intellij.psi.tree.IElementType;
 import com.verilang.VerilogLanguage;
 import com.verilang.VerilogParser;
+import com.verilang.psi.factory.nodes.*;
 import org.antlr.jetbrains.adaptor.lexer.PSIElementTypeFactory;
 import org.antlr.jetbrains.adaptor.lexer.RuleIElementType;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
@@ -52,6 +53,14 @@ public class VerilogPsiNodeFactory {
                 getRuleIElementType(VerilogParser.RULE_net_declaration),
                 NetDeclarationPsiNode.class
         );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_port_identifier),
+                PortIdentifierPsiNode.class
+        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_net_identifier),
+                NetIdentifierPsiNode.class
+        );
     }
 
     private static RuleIElementType getRuleIElementType(int ruleIndex) {
@@ -59,7 +68,7 @@ public class VerilogPsiNodeFactory {
                 .get(ruleIndex);
     }
 
-    public static ANTLRPsiNode createComposite(ASTNode astNode) {
+    public static ANTLRPsiNode create(ASTNode astNode) {
         if (ruleIElementTypeClassMap.containsKey(astNode.getElementType())) {
             try {
                 return ruleIElementTypeClassMap.get(astNode.getElementType())

@@ -117,11 +117,11 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
         } else if (
                 IntStream.of(
                         VerilogLexer.Simple_identifier,
-                        VerilogLexer.Time_Identifier,
+                        VerilogLexer.Time_identifier,
                         VerilogLexer.Escaped_identifier
                 ).anyMatch(i -> i == type)) {
             return new TextAttributesKey[]{IDENTIFIER};
-        } else if (type == VerilogLexer.Dollar_Identifier) {
+        } else if (type == VerilogLexer.Dollar_identifier) {
             return new TextAttributesKey[]{DOLLAR_IDENTIFIER};
         } else if (type == VerilogParser.RULE_delay_control) {
             return new TextAttributesKey[]{DELAY_CONTROL};

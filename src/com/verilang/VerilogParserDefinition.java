@@ -99,7 +99,7 @@ public class VerilogParserDefinition implements ParserDefinition {
 
     @NotNull
     public PsiElement createElement(ASTNode node) {
-        return VerilogPsiNodeFactory.createComposite(node);
+        return VerilogPsiNodeFactory.create(node);
     }
 
 }

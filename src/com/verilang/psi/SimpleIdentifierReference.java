@@ -7,8 +7,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.verilang.VerilogFileType;
-import com.verilang.psi.factory.IdentifierPsiNode;
-import com.verilang.psi.factory.SimpleIdentifierPsiLeafNode;
+import com.verilang.psi.factory.nodes.IdentifierPsiNode;
+import com.verilang.psi.factory.nodes.SimpleIdentifierPsiLeafNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

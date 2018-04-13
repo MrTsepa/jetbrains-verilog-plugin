@@ -1,16 +1,16 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/Verilog.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
- * This class provides an empty implementation of {@link VerilogVisitor},
+ * This class provides an empty implementation of {@link VerilogParserVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class VerilogBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements VerilogVisitor<T> {
+public class VerilogParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements VerilogParserVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -165,13 +165,6 @@ public class VerilogBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitModule_or_generate_item(VerilogParser.Module_or_generate_itemContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitNon_port_module_item(VerilogParser.Non_port_module_itemContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,4 +1,4 @@
-package com.verilang.psi.factory;
+package com.verilang.psi.factory.nodes;
 
 import com.intellij.lang.ASTNode;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
@@ -9,4 +9,5 @@ public class ListOfPortDeclarationsPsiNode extends ANTLRPsiNode {
     public ListOfPortDeclarationsPsiNode(@NotNull ASTNode node) {
         super(node);
     }
+
 }
