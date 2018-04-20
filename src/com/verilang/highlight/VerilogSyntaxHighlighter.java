@@ -10,7 +10,6 @@ import com.intellij.psi.tree.IElementType;
 import com.verilang.VerilogKeywords;
 import com.verilang.VerilogLanguage;
 import com.verilang.VerilogLexer;
-import com.verilang.VerilogParser;
 import org.antlr.jetbrains.adaptor.lexer.ANTLRLexerAdaptor;
 import org.antlr.jetbrains.adaptor.lexer.TokenIElementType;
 import org.jetbrains.annotations.NotNull;
@@ -65,11 +64,6 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
                     "VERILOG_DOLLAR_IDENTIFIER",
                     CustomHighlighterColors.CUSTOM_KEYWORD2_ATTRIBUTES
             );
-    public static final TextAttributesKey DELAY_CONTROL =
-            createTextAttributesKey(
-                    "VERILOG_DELAY_CONTROL",
-                    CustomHighlighterColors.CUSTOM_KEYWORD3_ATTRIBUTES
-            );
     public static final TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey(
                     "VERILOG_BAD_CHARACTER",
@@ -123,8 +117,8 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
             return new TextAttributesKey[]{IDENTIFIER};
         } else if (type == VerilogLexer.Dollar_identifier) {
             return new TextAttributesKey[]{DOLLAR_IDENTIFIER};
-        } else if (type == VerilogParser.RULE_delay_control) {
-            return new TextAttributesKey[]{DELAY_CONTROL};
+        } else if (type == VerilogLexer.Bad_character) {
+            return new TextAttributesKey[]{BAD_CHARACTER};
         }
         return new TextAttributesKey[0];
     }

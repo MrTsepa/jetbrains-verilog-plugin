@@ -34,91 +34,16 @@ public class VerilogCompletionContributor extends CompletionContributor {
                         VerilogFileType.INSTANCE.getIcon()
                 )
         );
-        // TODO it is too dirty now, refactoring needed
         extend(
                 CompletionType.BASIC,
                 PlatformPatterns
                         .psiElement(),
-                new CompletionProvider<CompletionParameters>() {
-                    @Override
-                    protected void addCompletions(@NotNull CompletionParameters completionParameters,
-                                                  ProcessingContext processingContext,
-                                                  @NotNull CompletionResultSet completionResultSet) {
-                        PsiElement currentElement = completionParameters.getOriginalPosition();
-                        ModuleInstantiationPsiNode moduleInstantiationPsiNode =
-                                PsiTreeUtil.getParentOfType(currentElement, ModuleInstantiationPsiNode.class);
-                        if (moduleInstantiationPsiNode != null) {
-                            if (currentElement.getPrevSibling() != null
-                                    && currentElement.getPrevSibling().getText().equals(".")) {
-                                ModuleIdentifierPsiNode moduleIdentifierPsiNode =
-                                        PsiTreeUtil.getChildOfType(
-                                                moduleInstantiationPsiNode,
-                                                ModuleIdentifierPsiNode.class);
-                                if (moduleIdentifierPsiNode == null) {
-                                    return;
-                                }
-                                SimpleIdentifierPsiLeafNode simpleIdentifierPsiLeafNode =
-                                        (SimpleIdentifierPsiLeafNode) moduleIdentifierPsiNode.getNameIdentifier();
-                                if (simpleIdentifierPsiLeafNode == null) {
-                                    return;
-                                }
-                                Arrays.stream(
-                                        ((PsiReferenceBase.Poly)
-                                                simpleIdentifierPsiLeafNode.getReference()).multiResolve(true))
-                                        .map(ResolveResult::getElement)
-                                        .filter(Objects::nonNull)
-                                        .map(psiElement ->
-                                                (ModuleDeclarationPsiNode) psiElement)
-                                        .flatMap(moduleDeclarationPsiNode ->
-                                                moduleDeclarationPsiNode.getAvailableNamedElements().stream())
-                                        .forEach(psiNamedElement ->
-                                                completionResultSet.addElement(
-                                                        buildLookupElement(psiNamedElement, true)));
-                                return;
-                            }
-                        }
-
-                        ModuleDeclarationPsiNode moduleDeclarationPsiNode =
-                                PsiTreeUtil.getParentOfType(
-                                        completionParameters.getOriginalPosition(),
-                                        ModuleDeclarationPsiNode.class
-                                );
-                        if (moduleDeclarationPsiNode == null) {
-                            return;
-                        }
-                        moduleDeclarationPsiNode.getAvailableNamedElements()
-                                .forEach(psiNamedElement ->
-                                        completionResultSet.addElement(
-                                                buildLookupElement(psiNamedElement, false)));
-                    }
-                }
+                new VerilogCompletionProvider(
+                        VerilogFileType.INSTANCE.getIcon()
+                )
         );
     }
 
-    private LookupElement buildLookupElement(PsiNamedElement psiElement, boolean withModuleName) {
-        TypedDeclaration typedDeclarationParent =
-                PsiTreeUtil.getParentOfType(
-                        psiElement,
-                        TypedDeclaration.class
-                );
-        ModuleDeclarationPsiNode nodeModule =
-                PsiTreeUtil.getParentOfType(psiElement, ModuleDeclarationPsiNode.class);
-        String typeText = "";
-        String tailText = "";
 
-        if (withModuleName && nodeModule != null && nodeModule.getName() != null) {
-            tailText += " (" + nodeModule.getName() +
-                    " in \"" + nodeModule.getContainingFile().getName() + "\")";
-        }
-
-        if (typedDeclarationParent != null) {
-            typeText += typedDeclarationParent.getTypeText();
-        }
-
-        return LookupElementBuilder.create(psiElement)
-                .withIcon(VerilogFileType.INSTANCE.getIcon())
-                .withTypeText(typeText)
-                .withTailText(tailText);
-    }
 
 }
