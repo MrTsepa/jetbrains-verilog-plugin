@@ -39,6 +39,10 @@
             language="Verilog"
             implementationClass="com.verilang.completion.VerilogCompletionContributor"
     />
+    <annotator
+            language="Verilog"
+            implementationClass="com.verilang.annotation.VerilogAnnotator"
+    />
   </extensions>
 
   <actions>
