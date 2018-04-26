@@ -43,6 +43,7 @@
             language="Verilog"
             implementationClass="com.verilang.annotation.VerilogAnnotator"
     />
+    <sdkType implementation="com.verilang.IverilogSdkType" />
   </extensions>
 
   <actions>
