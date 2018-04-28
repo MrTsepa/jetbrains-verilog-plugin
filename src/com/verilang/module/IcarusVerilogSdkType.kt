@@ -1,12 +1,13 @@
-package com.verilang
+package com.verilang.module
 
 import com.intellij.openapi.projectRoots.*
+import com.verilang.VerilogIcons
 import org.jdom.Element
 
 import java.io.*
 import javax.swing.Icon
 
-class IverilogSdkType : SdkType("iverilog") {
+class IcarusVerilogSdkType : SdkType("iverilog") {
 
     companion object {
         const val DEFAULT_EXECUTABLE_NAME = "iverilog"

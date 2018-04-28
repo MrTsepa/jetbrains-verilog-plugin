@@ -43,7 +43,7 @@
             language="Verilog"
             implementationClass="com.verilang.annotation.VerilogAnnotator"
     />
-    <sdkType implementation="com.verilang.IverilogSdkType" />
+    <sdkType implementation="com.verilang.module.IcarusVerilogSdkType" />
   </extensions>
 
   <actions>
