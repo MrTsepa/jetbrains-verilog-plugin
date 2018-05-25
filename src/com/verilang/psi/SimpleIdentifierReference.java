@@ -98,10 +98,12 @@ public class SimpleIdentifierReference extends PsiReferenceBase.Poly<SimpleIdent
                 )
                 .stream()
                 .map(virtualFile ->
-                        (VerilogFile) PsiManager
+                        PsiManager
                                 .getInstance(myElement.getProject())
                                 .findFile(virtualFile))
                 .filter(Objects::nonNull)
+                .filter(psiFile -> psiFile instanceof VerilogFile)
+                .map(psiFile -> (VerilogFile) psiFile)
                 .collect(Collectors.toList());
     }
 
