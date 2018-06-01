@@ -13,9 +13,9 @@ public class VerilogSyntaxHighlighterTest {
                  VerilogLexer.K_module,
                  VerilogSyntaxHighlighter.getTypeForLiteralName("module")
          );
-        assertEquals(
-                VerilogLexer.K_if,
-                VerilogSyntaxHighlighter.getTypeForLiteralName("if")
-        );
+         assertEquals(
+                 VerilogLexer.K_if,
+                 VerilogSyntaxHighlighter.getTypeForLiteralName("if")
+         );
     }
 }
