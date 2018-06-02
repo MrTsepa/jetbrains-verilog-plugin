@@ -11,11 +11,9 @@ import com.intellij.psi.PsiElement;
  * so when type string is needed it can be found by calling
  * {@link com.intellij.psi.util.PsiTreeUtil#getParentOfType(PsiElement, Class)},
  * with {@link TypedDeclaration} as {@code Class}.
- *
- * For usage example see {@link SimpleIdentifierReference#getVariants()}
  */
 public interface TypedDeclaration extends PsiElement {
 
-   String getTypeText();
+    String getTypeText();
 
 }
