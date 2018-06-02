@@ -8,6 +8,10 @@ import org.hamcrest.Matchers.*
 
 class CompletionTest : LightCodeInsightFixtureTestCase() {
 
+    override fun getTestDataPath(): String {
+        return "tests/resources"
+    }
+
     fun `test references completion`() {
         myFixture.configureByText(VerilogFileType.INSTANCE, """
             module toplevel
@@ -63,6 +67,44 @@ class CompletionTest : LightCodeInsightFixtureTestCase() {
         assertThat(strings, hasItems(
                 "reg", "wire", "assign", "always", "initial"
         ))
+    }
+
+    fun `test by multiple files outer`() {
+        myFixture.copyFileToProject("Foo.v")
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+
+    wire bar;
+
+    Foo uut (
+        .<caret>
+    );
+
+endmodule
+            """
+        )
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItems("foo"))
+    }
+
+    fun `test by multiple files inner`() {
+        myFixture.copyFileToProject("Foo.v")
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+
+    wire bar;
+
+    MIL_TXD uut (
+        .foo(<caret>
+    );
+
+endmodule
+            """
+        )
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItems("bar"))
     }
 
 }

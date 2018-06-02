@@ -90,9 +90,8 @@ public class SimpleIdentifierReference extends PsiReferenceBase.Poly<SimpleIdent
     }
 
     private List<VerilogFile> getAllVerilogFiles() {
-        return FileBasedIndex.getInstance()
-                .getContainingFiles(
-                        FileTypeIndex.NAME,
+        return FileTypeIndex
+                .getFiles(
                         VerilogFileType.INSTANCE,
                         GlobalSearchScope.allScope(myElement.getProject())
                 )
