@@ -42,6 +42,8 @@ class ModuleItemOuterReferenceCompletionProvider : CompletionProvider<Completion
         return LookupElementBuilder
                 .create(moduleDeclarationPsiNode)
                 .withIcon(VerilogFileType.INSTANCE.icon)
+                .withTypeText("module")
+                .withTailText(" (in \"${moduleDeclarationPsiNode.containingFile.name}\")")
     }
 
 }
