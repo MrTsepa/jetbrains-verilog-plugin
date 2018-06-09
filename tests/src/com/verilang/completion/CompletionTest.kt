@@ -107,4 +107,21 @@ endmodule
         assertThat(strings, hasItems("bar"))
     }
 
+    fun `test by multiple files outer module name`() {
+        myFixture.copyFileToProject("Foo.v")
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+
+    wire bar;
+
+    <caret>
+
+endmodule
+            """
+        )
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItems("MIL_TXD"))
+    }
+
 }
