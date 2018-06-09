@@ -85,7 +85,8 @@ endmodule
         )
         myFixture.completeBasic()
         val strings = myFixture.lookupElementStrings ?: throw Exception()
-        assertThat(strings, hasItems("foo"))
+        assertThat(strings, hasItem("foo"))
+        assertThat(strings, not(hasItem("bar")))
     }
 
     fun `test by multiple files inner`() {
