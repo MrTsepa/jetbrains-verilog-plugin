@@ -122,7 +122,89 @@ endmodule
         )
         myFixture.completeBasic()
         val strings = myFixture.lookupElementStrings ?: throw Exception()
-        assertThat(strings, hasItems("MIL_TXD"))
+        assertThat(strings, hasItem("Foo"))
+        assertThat(strings, not(hasItem("Bar")))
+    }
+
+    fun `test by multiple files outer module name 2`() {
+        myFixture.copyFileToProject("Foo.v")
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+
+    <caret>
+
+endmodule
+            """
+        )
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItem("Foo"))
+        assertThat(strings, not(hasItem("Bar")))
+    }
+
+    fun `test by multiple files outer module name 3`() {
+        myFixture.copyFileToProject("Foo.v")
+        myFixture.copyFileToProject("Biz.v")
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+
+    <caret>
+
+endmodule
+            """
+        )
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItems("Foo", "Biz"))
+        assertThat(strings, not(hasItems("Bar")))
+    }
+
+    fun `test by multiple files outer module name 4`() {
+        myFixture.copyFileToProject("Foo.v")
+        myFixture.copyFileToProject("Biz.v")
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+
+    wire bar;
+
+    Foo f (
+        .foo(bar)
+    );
+
+    <caret>
+
+endmodule
+            """
+        )
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItem("Biz"))
+        assertThat(strings, not(hasItem("Bar")))
+        assertThat(strings, not(hasItem("Foo")))
+    }
+
+    fun `test by multiple files outer module name 5`() {
+        myFixture.copyFileToProject("Foo.v")
+        myFixture.copyFileToProject("Biz.v")
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+
+    wire bar;
+
+    <caret>
+
+    Foo f (
+        .foo(bar)
+    );
+
+endmodule
+            """
+        )
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItem("Biz"))
+        assertThat(strings, not(hasItem("Bar")))
+        assertThat(strings, not(hasItem("Foo")))
     }
 
 }

@@ -81,6 +81,11 @@ public class VerilogPsiNodeFactory {
                 getRuleIElementType(VerilogParser.RULE_parameter_identifier),
                 ParameterIdentifierPsiNode.class
         );
+
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_statement),
+                StatementPsiNode.class
+        );
     }
 
     private static RuleIElementType getRuleIElementType(int ruleIndex) {

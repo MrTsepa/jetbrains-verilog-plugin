@@ -1,11 +1,15 @@
 package com.verilang.completion;
 
 import com.intellij.codeInsight.completion.*;
-import com.intellij.patterns.*;
+import com.intellij.patterns.ElementPattern;
+import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.verilang.VerilogFileType;
 import com.verilang.VerilogKeywords;
 import com.verilang.psi.factory.nodes.ModuleInstantiationPsiNode;
+import com.verilang.psi.factory.nodes.StatementPsiNode;
+
+import static com.intellij.patterns.StandardPatterns.*;
 
 
 public class VerilogCompletionContributor extends CompletionContributor {
@@ -18,6 +22,15 @@ public class VerilogCompletionContributor extends CompletionContributor {
                         VerilogKeywords.VERILOG_KEYWORDS,
                         VerilogFileType.INSTANCE.getIcon()
                 )
+        );
+
+        extend(
+                CompletionType.BASIC,
+                and(
+                        PlatformPatterns.psiElement().afterLeaf(";"),
+                        not(PlatformPatterns.psiElement().inside(StatementPsiNode.class))
+                ),
+                new ModuleItemOuterReferenceCompletionProvider()
         );
 
         ElementPattern<PsiElement> moduleInstantiationOuterReferencePattern =
@@ -33,9 +46,7 @@ public class VerilogCompletionContributor extends CompletionContributor {
 
         extend(
                 CompletionType.BASIC,
-                StandardPatterns.not(
-                        moduleInstantiationOuterReferencePattern
-                ),
+                not(moduleInstantiationOuterReferencePattern),
                 new ReferenceCompletionProvider()
         );
     }

@@ -2,17 +2,14 @@ package com.verilang.psi;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.search.FileTypeIndex;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.indexing.FileBasedIndex;
-import com.verilang.VerilogFileType;
 import com.verilang.psi.factory.nodes.*;
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static com.verilang.utils.FileUtilsKt.getAllVerilogFiles;
 
 
 public class SimpleIdentifierReference extends PsiReferenceBase.Poly<SimpleIdentifierPsiLeafNode> {
@@ -26,7 +23,7 @@ public class SimpleIdentifierReference extends PsiReferenceBase.Poly<SimpleIdent
     public ResolveResult[] multiResolve(boolean b) {
         if (isChildOf(ModuleInstantiationPsiNode.class)) {
             if (isChildOf(ModuleIdentifierPsiNode.class)) {
-                return getAllVerilogFiles().stream()
+                return getAllVerilogFiles(myElement.getProject()).stream()
                         .flatMap(verilogFile -> verilogFile.getAvailableNamedElements().stream())
                         .filter(psiNamedElement -> psiNamedElement instanceof ModuleDeclarationPsiNode)
                         .filter(psiNamedElement ->
@@ -87,23 +84,6 @@ public class SimpleIdentifierReference extends PsiReferenceBase.Poly<SimpleIdent
 
     private boolean isChildOf(Class<? extends ANTLRPsiNode> aClass) {
         return PsiTreeUtil.getParentOfType(myElement, aClass) != null;
-    }
-
-    private List<VerilogFile> getAllVerilogFiles() {
-        return FileTypeIndex
-                .getFiles(
-                        VerilogFileType.INSTANCE,
-                        GlobalSearchScope.allScope(myElement.getProject())
-                )
-                .stream()
-                .map(virtualFile ->
-                        PsiManager
-                                .getInstance(myElement.getProject())
-                                .findFile(virtualFile))
-                .filter(Objects::nonNull)
-                .filter(psiFile -> psiFile instanceof VerilogFile)
-                .map(psiFile -> (VerilogFile) psiFile)
-                .collect(Collectors.toList());
     }
 
 }
