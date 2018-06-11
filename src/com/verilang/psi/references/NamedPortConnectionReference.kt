@@ -9,7 +9,7 @@ import com.verilang.psi.factory.nodes.*
 class NamedPortConnectionReference(element: NamedPortConnectionPsiNode)
     : PsiReferenceBase.Poly<NamedPortConnectionPsiNode>(
         element,
-        element.getPortIdentifierRelativeTextRange(),
+        element.getHoldPsiNodeRelativeTextRange(),
         true
 ) {
     
@@ -17,17 +17,12 @@ class NamedPortConnectionReference(element: NamedPortConnectionPsiNode)
         val moduleInstantiationPsiNode = PsiTreeUtil
                 .getParentOfType(myElement, ModuleInstantiationPsiNode::class.java)
                 ?: return emptyArray()
-        val simpleIdentifier = PsiTreeUtil
-                .findChildOfType(
-                        PsiTreeUtil.findChildOfType(moduleInstantiationPsiNode, ModuleIdentifierPsiNode::class.java),
-                        SimpleIdentifierPsiLeafNode::class.java)
-                ?: return emptyArray()
-        return (simpleIdentifier.reference as? PsiReferenceBase.Poly<*> ?: return emptyArray())
+        return (moduleInstantiationPsiNode.reference as? PsiReferenceBase.Poly<*> ?: return emptyArray())
                 .multiResolve(incompleteCode)
                 .map { it.element }
                 .filterIsInstance(ModuleDeclarationPsiNode::class.java)
                 .flatMap { it.availableNamedElements }
-                .filter { it.name == myElement.getPortIdentifier()?.name }
+                .filter { it.name == myElement.getHoldPsiNode()?.name }
                 .map { PsiElementResolveResult(it) }
                 .toTypedArray()
     }

@@ -4,19 +4,15 @@ import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiReference
 import com.intellij.psi.util.PsiTreeUtil
-import com.verilang.psi.references.NamedPortConnectionReference
+import com.verilang.psi.references.ModuleInstantiationReference
 import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode
 
-class NamedPortConnectionPsiNode(node: ASTNode)
-    : ANTLRPsiNode(node), ReferenceHolder<PortIdentifierPsiNode> {
+class ModuleInstantiationPsiNode(node: ASTNode) :
+        ANTLRPsiNode(node), ReferenceHolder<ModuleIdentifierPsiNode> {
 
-    override fun getReference(): PsiReference {
-        return NamedPortConnectionReference(this)
-    }
-
-    public override fun getHoldPsiNode(): PortIdentifierPsiNode? {
+    public override fun getHoldPsiNode(): ModuleIdentifierPsiNode? {
         return PsiTreeUtil
-                .findChildOfType(this, PortIdentifierPsiNode::class.java)
+                .findChildOfType(this, ModuleIdentifierPsiNode::class.java)
     }
 
     public override fun getHoldPsiNodeRelativeTextRange(): TextRange? {
@@ -25,4 +21,7 @@ class NamedPortConnectionPsiNode(node: ASTNode)
                 ?.shiftLeft(this.textOffset)
     }
 
+    override fun getReference(): PsiReference {
+        return ModuleInstantiationReference(this)
+    }
 }

@@ -15,26 +15,24 @@ import org.antlr.jetbrains.adaptor.psi.ANTLRPsiNode
 class ModuleDeclarationPsiNode(node: ASTNode)
     : ANTLRPsiNode(node), PsiNameIdentifierOwner, ScopeNode {
 
+    override fun getNameIdentifier(): ModuleIdentifierPsiNode? {
+        return PsiTreeUtil
+                .findChildOfType(this, ModuleIdentifierPsiNode::class.java)
+    }
+
     override fun getName(): String? {
         return nameIdentifier?.text
     }
 
-    override fun getNameIdentifier(): PsiElement? {
-        return PsiTreeUtil
-                .findChildOfType(this, ModuleIdentifierPsiNode::class.java)
-                ?.firstChild
-    }
-
     override fun getTextOffset(): Int {
-        return PsiTreeUtil
-                .findChildOfType(this, ModuleIdentifierPsiNode::class.java)
-                ?.startOffsetInParent ?: 0
+        return nameIdentifier?.startOffsetInParent ?: 0
     }
 
     @Throws(IncorrectOperationException::class)
     override fun setName(s: String): PsiElement? {
-        return this.nameIdentifier?.replace(
-                VerilogPsiLeafNodeFactory.create(VerilogLexer.Simple_identifier, s))
+        return PsiTreeUtil
+                .findChildOfType(this.nameIdentifier, SimpleIdentifierPsiLeafNode::class.java)
+                ?.replace(VerilogPsiLeafNodeFactory.create(VerilogLexer.Simple_identifier, s))
     }
 
     override fun getAvailableNamedElements(): Collection<PsiNamedElement> {

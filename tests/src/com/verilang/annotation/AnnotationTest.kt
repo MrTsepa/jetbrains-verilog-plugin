@@ -26,6 +26,27 @@ class AnnotationTest : LightCodeInsightFixtureTestCase() {
         myFixture.testHighlighting(false, false, false)
     }
 
+    fun `test unresolved reference module instantiation`() {
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+    wire bar;
+    <error descr="Unresolved reference">Foo</error> uut (
+        .<error descr="Unresolved reference">foo</error>(bar)
+    );
+endmodule""".trimIndent())
+        myFixture.testHighlighting(false, false, false)
+    }
+
+    fun `test unresolved reference module instantiation and local reference`() {
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+module Bar;
+    <error descr="Unresolved reference">Foo</error> uut (
+        .<error descr="Unresolved reference">foo</error>(<error descr="Unresolved reference">bar</error>)
+    );
+endmodule""".trimIndent())
+        myFixture.testHighlighting(false, false, false)
+    }
+
     fun `test all references are ok`() {
         myFixture.configureByText(VerilogFileType.INSTANCE, """
 module MIL_TXD (
