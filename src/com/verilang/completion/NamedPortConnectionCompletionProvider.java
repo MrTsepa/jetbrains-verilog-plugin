@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ModuleInstantiationOuterReferenceCompletionProvider extends CompletionProvider<CompletionParameters> {
+public class NamedPortConnectionCompletionProvider extends CompletionProvider<CompletionParameters> {
 
     @Override
     protected void addCompletions(@NotNull CompletionParameters parameters,

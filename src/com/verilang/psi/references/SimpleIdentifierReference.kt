@@ -1,4 +1,4 @@
-package com.verilang.psi
+package com.verilang.psi.references
 
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
@@ -17,7 +17,7 @@ class SimpleIdentifierReference(element: SimpleIdentifierPsiLeafNode) :
                 return resolveModuleNames(incompleteCode)
             }
             if (isChildOf(PortIdentifierPsiNode::class.java)) {
-                return resolveInAllModules(incompleteCode)
+                // Do nothing
             }
         }
         return resolveLocally(incompleteCode)
@@ -39,25 +39,6 @@ class SimpleIdentifierReference(element: SimpleIdentifierPsiLeafNode) :
         return getAllVerilogFiles(myElement.project)
                 .flatMap { it.availableNamedElements }
                 .filterIsInstance(ModuleDeclarationPsiNode::class.java)
-                .filter { it.name == myElement.name }
-                .map { PsiElementResolveResult(it) }
-                .toTypedArray()
-    }
-
-    private fun resolveInAllModules(incompleteCode: Boolean): Array<ResolveResult> {
-        val moduleInstantiationPsiNode = PsiTreeUtil
-                .getParentOfType(myElement, ModuleInstantiationPsiNode::class.java)
-                ?: return emptyArray()
-        val simpleIdentifier = PsiTreeUtil
-                .findChildOfType(
-                        PsiTreeUtil.findChildOfType(moduleInstantiationPsiNode, ModuleIdentifierPsiNode::class.java),
-                        SimpleIdentifierPsiLeafNode::class.java)
-                ?: return emptyArray()
-        return (simpleIdentifier.reference as? PsiReferenceBase.Poly<*> ?: return emptyArray())
-                .multiResolve(incompleteCode)
-                .map { it.element }
-                .filterIsInstance(ModuleDeclarationPsiNode::class.java)
-                .flatMap { it.availableNamedElements }
                 .filter { it.name == myElement.name }
                 .map { PsiElementResolveResult(it) }
                 .toTypedArray()

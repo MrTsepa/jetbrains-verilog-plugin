@@ -1,5 +1,6 @@
 package com.verilang.referencing
 
+import com.intellij.psi.impl.source.resolve.reference.impl.PsiMultiReference
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import com.verilang.VerilogFileType
@@ -117,9 +118,15 @@ endmodule
             """
         )
         val reference = myFixture.getReferenceAtCaretPositionWithAssertion()
-        assertThat(PsiTreeUtil.getParentOfType(
-                reference.resolve(), PortDeclarationPsiNode::class.java
-        )?.text, `is`("input foo"))
+        if (reference is PsiMultiReference) {
+            assertThat(PsiTreeUtil.getParentOfType(
+                    reference.multiResolve(false)[0].element, PortDeclarationPsiNode::class.java
+            )?.text, `is`("input foo"))
+        } else {
+            assertThat(PsiTreeUtil.getParentOfType(
+                    reference.resolve(), PortDeclarationPsiNode::class.java
+            )?.text, `is`("input foo"))
+        }
     }
 
     fun `test reference to port in inner module` () {
