@@ -14,15 +14,13 @@ import com.intellij.util.ProcessingContext;
 import com.verilang.VerilogFileType;
 import com.verilang.psi.TypedDeclaration;
 import com.verilang.psi.factory.nodes.ModuleDeclarationPsiNode;
-import com.verilang.psi.factory.nodes.ModuleIdentifierPsiNode;
 import com.verilang.psi.factory.nodes.ModuleInstantiationPsiNode;
-import com.verilang.psi.factory.nodes.SimpleIdentifierPsiLeafNode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ModuleInstantiationOuterReferenceCompletionProvider extends CompletionProvider<CompletionParameters> {
+public class NamedPortConnectionCompletionProvider extends CompletionProvider<CompletionParameters> {
 
     @Override
     protected void addCompletions(@NotNull CompletionParameters parameters,
@@ -32,22 +30,12 @@ public class ModuleInstantiationOuterReferenceCompletionProvider extends Complet
 
         ModuleInstantiationPsiNode moduleInstantiationPsiNode =
                 PsiTreeUtil.getParentOfType(currentElement, ModuleInstantiationPsiNode.class);
-
-        ModuleIdentifierPsiNode moduleIdentifierPsiNode =
-                PsiTreeUtil.getChildOfType(
-                        moduleInstantiationPsiNode,
-                        ModuleIdentifierPsiNode.class);
-        if (moduleIdentifierPsiNode == null) {
-            return;
-        }
-        SimpleIdentifierPsiLeafNode simpleIdentifierPsiLeafNode =
-                (SimpleIdentifierPsiLeafNode) moduleIdentifierPsiNode.getNameIdentifier();
-        if (simpleIdentifierPsiLeafNode == null) {
+        if (moduleInstantiationPsiNode == null) {
             return;
         }
         Arrays.stream(
                 ((PsiReferenceBase.Poly)
-                        simpleIdentifierPsiLeafNode.getReference()).multiResolve(true))
+                        moduleInstantiationPsiNode.getReference()).multiResolve(true))
                 .map(ResolveResult::getElement)
                 .filter(Objects::nonNull)
                 .map(psiElement ->

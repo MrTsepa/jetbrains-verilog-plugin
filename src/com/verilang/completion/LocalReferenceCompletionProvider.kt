@@ -12,7 +12,7 @@ import com.verilang.VerilogFileType
 import com.verilang.psi.TypedDeclaration
 import com.verilang.psi.factory.nodes.ModuleDeclarationPsiNode
 
-class ReferenceCompletionProvider : CompletionProvider<CompletionParameters>() {
+class LocalReferenceCompletionProvider : CompletionProvider<CompletionParameters>() {
 
     override fun addCompletions(parameters: CompletionParameters,
                                 context: ProcessingContext?,

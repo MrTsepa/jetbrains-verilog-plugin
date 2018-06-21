@@ -6,7 +6,8 @@ import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.verilang.VerilogFileType;
 import com.verilang.VerilogKeywords;
-import com.verilang.psi.factory.nodes.ModuleInstantiationPsiNode;
+import com.verilang.psi.factory.nodes.NamedPortConnectionPsiNode;
+import com.verilang.psi.factory.nodes.PortIdentifierPsiNode;
 import com.verilang.psi.factory.nodes.StatementPsiNode;
 
 import static com.intellij.patterns.StandardPatterns.*;
@@ -33,21 +34,21 @@ public class VerilogCompletionContributor extends CompletionContributor {
                 new ModuleItemOuterReferenceCompletionProvider()
         );
 
-        ElementPattern<PsiElement> moduleInstantiationOuterReferencePattern =
+        ElementPattern<PsiElement> namedPortConnectionPattern =
                 PlatformPatterns.psiElement()
-                        .inside(ModuleInstantiationPsiNode.class)
-                        .afterLeaf(".");
+                        .inside(NamedPortConnectionPsiNode.class)
+                        .inside(PortIdentifierPsiNode.class);
 
         extend(
                 CompletionType.BASIC,
-                moduleInstantiationOuterReferencePattern,
-                new ModuleInstantiationOuterReferenceCompletionProvider()
+                namedPortConnectionPattern,
+                new NamedPortConnectionCompletionProvider()
         );
 
         extend(
                 CompletionType.BASIC,
-                not(moduleInstantiationOuterReferencePattern),
-                new ReferenceCompletionProvider()
+                not(namedPortConnectionPattern),
+                new LocalReferenceCompletionProvider()
         );
     }
 
