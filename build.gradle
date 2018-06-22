@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+
+    ext.kotlin_version = '1.2.41'
+
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.3.3"
+}
+
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+intellij {
+    version 'IC-2018.1.5'
+    plugins 'coverage' //Bundled plugin dependencies
+    pluginName 'Verilog support'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src", "adaptor/src", "gen"]
+        }
+        resources {
+            srcDirs = ["resources"]
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ["tests/src"]
+        }
+        resources {
+            srcDirs = ["tests/resources"]
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+    compile group: 'org.antlr', name: 'antlr4-runtime', version: '4.7.1'
+}
+
+
+group 'org.jetbrains'
+version '1.6'
