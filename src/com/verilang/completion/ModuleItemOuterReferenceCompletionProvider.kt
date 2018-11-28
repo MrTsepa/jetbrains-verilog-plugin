@@ -16,7 +16,7 @@ import com.verilang.utils.getAllVerilogFiles
 class ModuleItemOuterReferenceCompletionProvider : CompletionProvider<CompletionParameters>() {
 
     override fun addCompletions(parameters: CompletionParameters,
-                                context: ProcessingContext?,
+                                context: ProcessingContext,
                                 resultSet: CompletionResultSet) {
         val element = parameters.originalPosition
         val currentModuleDeclaration =

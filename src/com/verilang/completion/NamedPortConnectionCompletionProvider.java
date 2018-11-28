@@ -24,7 +24,7 @@ public class NamedPortConnectionCompletionProvider extends CompletionProvider<Co
 
     @Override
     protected void addCompletions(@NotNull CompletionParameters parameters,
-                                  ProcessingContext context,
+                                  @NotNull ProcessingContext context,
                                   @NotNull CompletionResultSet resultSet) {
         PsiElement currentElement = parameters.getOriginalPosition();
 

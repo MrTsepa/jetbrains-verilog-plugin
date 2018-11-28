@@ -15,7 +15,7 @@ import com.verilang.psi.factory.nodes.ModuleDeclarationPsiNode
 class LocalReferenceCompletionProvider : CompletionProvider<CompletionParameters>() {
 
     override fun addCompletions(parameters: CompletionParameters,
-                                context: ProcessingContext?,
+                                context: ProcessingContext,
                                 completionResultSet: CompletionResultSet) {
         val moduleDeclarationPsiNode = PsiTreeUtil.getParentOfType(
                 parameters.originalPosition,

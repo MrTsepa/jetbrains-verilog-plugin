@@ -43,6 +43,10 @@
             language="Verilog"
             implementationClass="com.verilang.annotation.VerilogAnnotator"
     />
+    <lang.commenter
+            language="Verilog"
+            implementationClass="com.verilang.commenter.VerilogCommenter"
+    />
   </extensions>
 
   <actions>
