@@ -85,6 +85,41 @@ endmodule""".trimIndent())
         assertThat(strings, not(hasItem("module")))
     }
 
+    fun `test directive keyword completion 2`() {
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+`i<caret>
+
+module toplevel;
+    wire bar;
+
+endmodule""".trimIndent())
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItems(
+                "include", "timescale"
+        ))
+        assertThat(strings, not(hasItems(
+                "default_nettype"
+        )))
+        assertThat(strings, not(hasItem("module")))
+    }
+
+    fun `test directive keyword completion 3`() {
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+`include "<caret>
+
+module toplevel;
+    wire bar;
+
+endmodule""".trimIndent())
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, not(hasItems(
+                "include", "timescale", "default_nettype"
+        )))
+        assertThat(strings, not(hasItem("module")))
+    }
+
     fun `test by multiple files outer`() {
         myFixture.copyFileToProject("Foo.v")
         myFixture.configureByText(VerilogFileType.INSTANCE, """

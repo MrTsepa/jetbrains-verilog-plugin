@@ -25,7 +25,7 @@ public class VerilogCompletionContributor extends CompletionContributor {
 
         extend(
                 CompletionType.BASIC,
-                PlatformPatterns.psiElement().inside(DirectivePsiNode.class),
+                PlatformPatterns.psiElement().inside(DirectivePsiNode.class).afterLeaf("`"),
                 new KeywordCompletionProvider(
                         new String[]{"timescale", "include", "default_nettype"},
                         VerilogFileType.INSTANCE.getIcon()
