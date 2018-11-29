@@ -11,11 +11,11 @@ public class VerilogSyntaxHighlighterTest {
     public void getTypeForLiteralName() {
          assertEquals(
                  VerilogLexer.K_module,
-                 VerilogSyntaxHighlighter.getTypeForLiteralName("module")
+                 VerilogLexerSyntaxHighlighter.getTypeForLiteralName("module")
          );
          assertEquals(
                  VerilogLexer.K_if,
-                 VerilogSyntaxHighlighter.getTypeForLiteralName("if")
+                 VerilogLexerSyntaxHighlighter.getTypeForLiteralName("if")
          );
     }
 }

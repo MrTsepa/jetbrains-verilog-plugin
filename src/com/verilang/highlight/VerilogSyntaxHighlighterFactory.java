@@ -12,7 +12,7 @@ public class VerilogSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
     @NotNull
     @Override
     public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
-        return new VerilogSyntaxHighlighter();
+        return new VerilogLexerSyntaxHighlighter();
     }
 
 }

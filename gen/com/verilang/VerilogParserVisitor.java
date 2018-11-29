@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/jetbrains-verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -10,6 +10,30 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface VerilogParserVisitor<T> extends ParseTreeVisitor<T> {
+	/**
+	 * Visit a parse tree produced by {@link VerilogParser#directive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDirective(VerilogParser.DirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link VerilogParser#timescale_directive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTimescale_directive(VerilogParser.Timescale_directiveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link VerilogParser#include_directive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInclude_directive(VerilogParser.Include_directiveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link VerilogParser#default_nettype_directive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefault_nettype_directive(VerilogParser.Default_nettype_directiveContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link VerilogParser#config_declaration}.
 	 * @param ctx the parse tree
@@ -1558,12 +1582,6 @@ public interface VerilogParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNumber(VerilogParser.NumberContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VerilogParser#timing_spec}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTiming_spec(VerilogParser.Timing_specContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link VerilogParser#attribute_instance}.
 	 * @param ctx the parse tree

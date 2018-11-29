@@ -89,6 +89,14 @@ public class VerilogPsiNodeFactory {
                 getRuleIElementType(VerilogParser.RULE_named_port_connection),
                 NamedPortConnectionPsiNode.class
         );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_directive),
+                DirectivePsiNode.class
+        );
+        ruleIElementTypeClassMap.put(
+                getRuleIElementType(VerilogParser.RULE_source_text),
+                SourceTextPsiNode.class
+        );
     }
 
     private static RuleIElementType getRuleIElementType(int ruleIndex) {
