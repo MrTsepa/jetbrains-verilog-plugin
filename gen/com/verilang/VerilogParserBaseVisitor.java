@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/jetbrains-verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -11,6 +11,34 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 public class VerilogParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements VerilogParserVisitor<T> {
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitDirective(VerilogParser.DirectiveContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitTimescale_directive(VerilogParser.Timescale_directiveContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitInclude_directive(VerilogParser.Include_directiveContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitDefault_nettype_directive(VerilogParser.Default_nettype_directiveContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1817,13 +1845,6 @@ public class VerilogParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitNumber(VerilogParser.NumberContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitTiming_spec(VerilogParser.Timing_specContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

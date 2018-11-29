@@ -7,7 +7,7 @@ import com.intellij.psi.PsiReferenceBase
 import com.intellij.psi.util.PsiTreeUtil
 import com.verilang.psi.factory.nodes.*
 
-class VerilogAnnotator : Annotator {
+class VerilogReferenceAnnotator : Annotator {
 
     override fun annotate(psiElement: PsiElement, annotationHolder: AnnotationHolder) {
 

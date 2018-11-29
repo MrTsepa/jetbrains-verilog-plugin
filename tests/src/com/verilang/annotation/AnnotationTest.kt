@@ -49,6 +49,9 @@ endmodule""".trimIndent())
 
     fun `test all references are ok`() {
         myFixture.configureByText(VerilogFileType.INSTANCE, """
+`include "/common/definitions.v"
+`timescale 3ms / 5ns
+
 module MIL_TXD (
 	input clk,
 	input[15:0] dat,

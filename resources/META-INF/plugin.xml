@@ -35,13 +35,17 @@
             language="Verilog"
             implementationClass="com.verilang.highlight.VerilogSyntaxHighlighterFactory"
     />
+    <annotator
+            language="Verilog"
+            implementationClass="com.verilang.highlight.VerilogHighlightingAnnotator"
+    />
     <completion.contributor
             language="Verilog"
             implementationClass="com.verilang.completion.VerilogCompletionContributor"
     />
     <annotator
             language="Verilog"
-            implementationClass="com.verilang.annotation.VerilogAnnotator"
+            implementationClass="com.verilang.annotation.VerilogReferenceAnnotator"
     />
     <lang.commenter
             language="Verilog"

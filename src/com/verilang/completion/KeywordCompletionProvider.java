@@ -25,9 +25,8 @@ public class KeywordCompletionProvider extends CompletionProvider<CompletionPara
 
     @Override
     protected void addCompletions(@NotNull CompletionParameters completionParameters,
-                                  ProcessingContext processingContext,
+                                  @NotNull ProcessingContext processingContext,
                                   @NotNull CompletionResultSet completionResultSet) {
-
         for (String keyword : keywords) {
             completionResultSet.addElement(
                     LookupElementBuilder.create(keyword)

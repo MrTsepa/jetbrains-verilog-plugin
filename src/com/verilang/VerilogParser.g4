@@ -50,10 +50,30 @@ library_descriptions
 library_declaration :
 'library' library_identifier File_path_spec ( ( ',' File_path_spec )* )? ( '-incdir' File_path_spec ( ',' File_path_spec )* )? ';' ;
 
-File_path_spec : ([/~]|'./') ~[ \r\t\n]*? ;
 
-include_statement : 'include' File_path_spec ';' ;
 */
+
+//timing_spec
+//   : '`' 'timescale' Time_identifier '/' Time_identifier
+//   ;
+
+directive
+   : '`' (timescale_directive | include_directive | default_nettype_directive)
+   ;
+
+timescale_directive
+   : 'timescale' Time_identifier '/' Time_identifier
+   ;
+
+include_directive
+   : 'include' Filepath
+   ;
+
+default_nettype_directive
+   : 'default_nettype' net_type
+   ;
+
+
 // 1.2 Configuration source text
 config_declaration
    : 'config' config_identifier ';' design_statement (config_rule_statement)* 'endconfig'
@@ -98,7 +118,7 @@ use_clause
 // 1.3 Module and primitive source text
 // START SYMBOL
 source_text
-   : timing_spec? description* EOF
+   : (directive | description)* EOF
    ;
 
 description
@@ -1653,9 +1673,6 @@ number
 
 // 9 General
 // 9.1 Attributes
-timing_spec
-   : '`' 'timescale' Time_identifier '/' Time_identifier
-   ;
 
 attribute_instance
    : '(' '*' attr_spec (',' attr_spec)* '*' ')'

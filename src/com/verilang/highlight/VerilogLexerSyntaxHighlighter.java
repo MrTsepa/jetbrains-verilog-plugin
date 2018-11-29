@@ -10,7 +10,6 @@ import com.intellij.psi.tree.IElementType;
 import com.verilang.VerilogKeywords;
 import com.verilang.VerilogLanguage;
 import com.verilang.VerilogLexer;
-import com.verilang.VerilogParser;
 import org.antlr.jetbrains.adaptor.lexer.ANTLRLexerAdaptor;
 import org.antlr.jetbrains.adaptor.lexer.TokenIElementType;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +19,7 @@ import java.util.stream.IntStream;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
+public class VerilogLexerSyntaxHighlighter extends SyntaxHighlighterBase {
 
     public static final TextAttributesKey LINE_COMMENT =
             createTextAttributesKey(
@@ -65,11 +64,6 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
                     "VERILOG_DOLLAR_IDENTIFIER",
                     CustomHighlighterColors.CUSTOM_KEYWORD2_ATTRIBUTES
             );
-    public static final TextAttributesKey DELAY_CONTROL =
-            createTextAttributesKey(
-                    "VERILOG_DELAY_CONTROL",
-                    CustomHighlighterColors.CUSTOM_KEYWORD3_ATTRIBUTES
-            );
     public static final TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey(
                     "VERILOG_BAD_CHARACTER",
@@ -109,7 +103,7 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
             return new TextAttributesKey[]{NUMBER};
         } else if (
                 Arrays.stream(VerilogKeywords.VERILOG_KEYWORDS)
-                        .mapToInt(VerilogSyntaxHighlighter::getTypeForLiteralName)
+                        .mapToInt(VerilogLexerSyntaxHighlighter::getTypeForLiteralName)
                         .anyMatch(i -> i == type)) {
             return new TextAttributesKey[]{KEYWORD};
         } else if (type == VerilogLexer.String) {
@@ -123,8 +117,6 @@ public class VerilogSyntaxHighlighter extends SyntaxHighlighterBase {
             return new TextAttributesKey[]{IDENTIFIER};
         } else if (type == VerilogLexer.Dollar_identifier) {
             return new TextAttributesKey[]{DOLLAR_IDENTIFIER};
-        } else if (type == VerilogParser.RULE_delay_control) {
-            return new TextAttributesKey[]{DELAY_CONTROL};
         }
         return new TextAttributesKey[0];
     }

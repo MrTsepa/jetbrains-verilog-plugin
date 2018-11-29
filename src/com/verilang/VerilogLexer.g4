@@ -25,6 +25,7 @@ K_cell : 'cell' ;
 K_cmos : 'cmos' ;
 K_deassign : 'deassign' ;
 K_default : 'default' ;
+K_default_nettype : 'default_nettype' ;
 K_defparam : 'defparam' ;
 K_design : 'design' ;
 K_disable : 'disable' ;
@@ -170,6 +171,8 @@ Vertical_line : '|' ;
 Apostrophe : '`' ;
 Tilda : '~' ;
 Hat : '^' ;
+Quotation_mark : '"' ;
+
 
 Real_number
    : Unsigned_number Dot Unsigned_number | Unsigned_number (Dot Unsigned_number)? [eE] ([+-])? Unsigned_number
@@ -296,6 +299,10 @@ Dollar_identifier
 
 Time_identifier
    : [0-9] + [mnpf] 's'
+   ;
+
+Filepath
+   : '"' (~ [\n\r])+ '"'
    ;
 
 

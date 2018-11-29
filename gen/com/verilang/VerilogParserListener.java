@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/jetbrains-verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -7,6 +7,46 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link VerilogParser}.
  */
 public interface VerilogParserListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link VerilogParser#directive}.
+	 * @param ctx the parse tree
+	 */
+	void enterDirective(VerilogParser.DirectiveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link VerilogParser#directive}.
+	 * @param ctx the parse tree
+	 */
+	void exitDirective(VerilogParser.DirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link VerilogParser#timescale_directive}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimescale_directive(VerilogParser.Timescale_directiveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link VerilogParser#timescale_directive}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimescale_directive(VerilogParser.Timescale_directiveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link VerilogParser#include_directive}.
+	 * @param ctx the parse tree
+	 */
+	void enterInclude_directive(VerilogParser.Include_directiveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link VerilogParser#include_directive}.
+	 * @param ctx the parse tree
+	 */
+	void exitInclude_directive(VerilogParser.Include_directiveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link VerilogParser#default_nettype_directive}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefault_nettype_directive(VerilogParser.Default_nettype_directiveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link VerilogParser#default_nettype_directive}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefault_nettype_directive(VerilogParser.Default_nettype_directiveContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link VerilogParser#config_declaration}.
 	 * @param ctx the parse tree
@@ -2587,16 +2627,6 @@ public interface VerilogParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNumber(VerilogParser.NumberContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link VerilogParser#timing_spec}.
-	 * @param ctx the parse tree
-	 */
-	void enterTiming_spec(VerilogParser.Timing_specContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link VerilogParser#timing_spec}.
-	 * @param ctx the parse tree
-	 */
-	void exitTiming_spec(VerilogParser.Timing_specContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link VerilogParser#attribute_instance}.
 	 * @param ctx the parse tree

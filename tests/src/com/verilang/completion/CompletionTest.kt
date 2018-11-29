@@ -69,6 +69,22 @@ class CompletionTest : LightCodeInsightFixtureTestCase() {
         ))
     }
 
+    fun `test directive keyword completion`() {
+        myFixture.configureByText(VerilogFileType.INSTANCE, """
+`<caret>
+
+module toplevel;
+    wire bar;
+
+endmodule""".trimIndent())
+        myFixture.completeBasic()
+        val strings = myFixture.lookupElementStrings ?: throw Exception()
+        assertThat(strings, hasItems(
+                "include", "timescale", "default_nettype"
+        ))
+        assertThat(strings, not(hasItem("module")))
+    }
+
     fun `test by multiple files outer`() {
         myFixture.copyFileToProject("Foo.v")
         myFixture.configureByText(VerilogFileType.INSTANCE, """

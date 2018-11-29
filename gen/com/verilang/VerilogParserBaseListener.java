@@ -1,4 +1,4 @@
-// Generated from /Users/s.tsepa/IdeaProjects/verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
+// Generated from /Users/s.tsepa/IdeaProjects/jetbrains-verilog-plugin/src/com/verilang/VerilogParser.g4 by ANTLR 4.7
 package com.verilang;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -11,6 +11,54 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * of the available methods.
  */
 public class VerilogParserBaseListener implements VerilogParserListener {
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDirective(VerilogParser.DirectiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDirective(VerilogParser.DirectiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTimescale_directive(VerilogParser.Timescale_directiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTimescale_directive(VerilogParser.Timescale_directiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInclude_directive(VerilogParser.Include_directiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInclude_directive(VerilogParser.Include_directiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDefault_nettype_directive(VerilogParser.Default_nettype_directiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefault_nettype_directive(VerilogParser.Default_nettype_directiveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3107,18 +3155,6 @@ public class VerilogParserBaseListener implements VerilogParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNumber(VerilogParser.NumberContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTiming_spec(VerilogParser.Timing_specContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTiming_spec(VerilogParser.Timing_specContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
